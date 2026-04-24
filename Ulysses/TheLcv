@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legacy Collective Ventures — Investment Opportunities</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0B1221;
+    --navy-mid: #13203A;
+    --navy-light: #1E3158;
+    --gold: #C9A84C;
+    --gold-light: #E2C57A;
+    --gold-pale: #F5E9CC;
+    --cream: #FAF6EF;
+    --text-main: #F0EBE0;
+    --text-muted: #A09880;
+    --text-dim: #5C5648;
+    --border: rgba(201,168,76,0.18);
+    --border-strong: rgba(201,168,76,0.35);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: var(--navy);
+    color: var(--text-main);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(11,18,33,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+    padding: 0 5%;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--text-main);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--gold); }
+
+  .nav-cta {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 0.5px solid var(--border-strong);
+    padding: 10px 22px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .nav-cta:hover {
+    background: var(--gold);
+    color: var(--navy);
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 5% 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -300px;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+  }
+
+  .hero-inner {
+    max-width: 780px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 0.5px;
+    background: var(--gold);
+  }
+
+  .hero-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(46px, 6vw, 80px);
+    font-weight: 300;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    color: var(--text-main);
+    margin-bottom: 28px;
+  }
+
+  .hero-headline em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--text-muted);
+    max-width: 520px;
+    margin-bottom: 48px;
+    line-height: 1.75;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-light);
+  }
+
+  .btn-ghost {
+    display: inline-block;
+    color: var(--text-muted);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    padding: 16px 0;
+    border-bottom: 0.5px solid transparent;
+    transition: all 0.2s ease;
+  }
+
+  .btn-ghost:hover {
+    color: var(--text-main);
+    border-bottom-color: var(--border-strong);
+  }
+
+  /* TRUST BAR */
+  .trust-bar {
+    border-top: 0.5px solid var(--border);
+    border-bottom: 0.5px solid var(--border);
+    padding: 28px 5%;
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    overflow-x: auto;
+  }
+
+  .trust-bar-label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .trust-items {
+    display: flex;
+    gap: 48px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .trust-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .trust-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .trust-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* SECTION COMMON */
+  section { padding: 100px 5%; }
+
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 0.5px;
+    background: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--text-main);
+    margin-bottom: 16px;
+  }
+
+  .section-sub {
+    font-size: 16px;
+    color: var(--text-muted);
+    font-weight: 300;
+    max-width: 540px;
+    line-height: 1.8;
+  }
+
+  /* OPPORTUNITIES */
+  .opps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1px;
+    background: var(--navy);
+    margin-top: 56px;
+    border: 0.5px solid var(--border);
+  }
+
+  .opp-card {
+    background: var(--navy);
+    padding: 40px 36px;
+    transition: background 0.25s ease;
+    cursor: default;
+  }
+
+  .opp-card:hover { background: var(--navy-mid); }
+
+  .opp-icon {
+    width: 40px; height: 40px;
+    border: 0.5px solid var(--border-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    font-size: 18px;
+  }
+
+  .opp-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--text-main);
+    margin-bottom: 12px;
+  }
+
+  .opp-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.75;
+  }
+
+  .opp-tag {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 0.5px solid var(--border-strong);
+    padding: 5px 12px;
+  }
+
+  /* QUIZ CTA */
+  .quiz-section {
+    background: var(--navy-mid);
+    border-top: 0.5px solid var(--border);
+    border-bottom: 0.5px solid var(--border);
+    text-align: center;
+  }
+
+  .quiz-section .section-eyebrow { justify-content: center; }
+  .quiz-section .section-eyebrow::before { display: none; }
+
+  .quiz-section .section-title { margin: 0 auto 16px; }
+  .quiz-section .section-sub { margin: 0 auto 40px; }
+
+  .quiz-steps {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+
+  .quiz-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 28px;
+    border-right: 0.5px solid var(--border);
+  }
+
+  .quiz-step:last-child { border-right: none; }
+
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .step-text {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-align: left;
+    line-height: 1.5;
+  }
+
+  /* TESTIMONIAL / QUOTE BLOCK */
+  .quote-block {
+    border-left: 2px solid var(--gold);
+    padding: 24px 36px;
+    margin: 56px 0;
+    max-width: 680px;
+  }
+
+  .quote-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text-main);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .quote-attr {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* HOW IT WORKS */
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2px;
+    background: var(--border);
+    margin-top: 56px;
+    border: 0.5px solid var(--border);
+  }
+
+  .how-step {
+    background: var(--navy);
+    padding: 36px 30px;
+  }
+
+  .how-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--border-strong);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .how-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-main);
+    margin-bottom: 8px;
+  }
+
+  .how-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 48px 5%;
+    border-top: 0.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-muted);
+  }
+
+  .footer-logo span { color: var(--gold); }
+
+  .footer-note {
+    font-size: 12px;
+    color: var(--text-dim);
+    max-width: 480px;
+    line-height: 1.6;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    .quiz-step { padding: 16px 0; border-right: none; border-bottom: 0.5px solid var(--border); width: 100%; }
+    .trust-items { gap: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Legacy<span>.</span>Collective</a>
+  <a href="Quiz.html" class="nav-cta">Begin Investor Profile</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Selective. Strategic. Enduring.</div>
+    <h1 class="hero-headline">
+      Build wealth that<br>
+      <em>outlasts you.</em>
+    </h1>
+    <p class="hero-sub">
+      Legacy Collective Ventures connects accredited and emerging investors with high-conviction opportunities across real estate development, technology, and impact-driven assets.
+    </p>
+    <div class="hero-actions">
+      <a href="Quiz.html" class="btn-primary">Discover Your Investor Profile →</a>
+      <a href="#opportunities" class="btn-ghost">Explore opportunities</a>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-bar-label">By the numbers</div>
+  <div class="trust-items">
+    <div class="trust-item">
+      <div class="trust-num">$50M+</div>
+      <div class="trust-label">Capital Deployed</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-num">12+</div>
+      <div class="trust-label">Active Portfolios</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-num">3</div>
+      <div class="trust-label">Asset Classes</div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-num">KYC</div>
+      <div class="trust-label">Verified & Compliant</div>
+    </div>
+  </div>
+</div>
+
+<!-- OPPORTUNITIES -->
+<section id="opportunities">
+  <div class="section-eyebrow">Where We Invest</div>
+  <h2 class="section-title">High-conviction <br>opportunities</h2>
+  <p class="section-sub">Every opportunity in our portfolio is vetted, structured, and managed with a long-term lens.</p>
+
+  <div class="opps-grid">
+    <div class="opp-card">
+      <div class="opp-icon">⬡</div>
+      <div class="opp-title">Real Estate Development</div>
+      <p class="opp-desc">From ground-up multifamily to mixed-use urban infill projects. Strong risk-adjusted returns with tangible asset backing.</p>
+      <span class="opp-tag">Appreciation + Cash Flow</span>
+    </div>
+    <div class="opp-card">
+      <div class="opp-icon">◈</div>
+      <div class="opp-title">Affordable Housing</div>
+      <p class="opp-desc">Impact-forward investments that deliver consistent yield while addressing one of the nation's most urgent infrastructure gaps.</p>
+      <span class="opp-tag">Impact Investing</span>
+    </div>
+    <div class="opp-card">
+      <div class="opp-icon">◬</div>
+      <div class="opp-title">Technology & Startups</div>
+      <p class="opp-desc">High-growth venture positions in vetted early-stage companies. Curated for portfolio diversification and asymmetric upside.</p>
+      <span class="opp-tag">Growth</span>
+    </div>
+    <div class="opp-card">
+      <div class="opp-icon">◻</div>
+      <div class="opp-title">Mixed-Use Developments</div>
+      <p class="opp-desc">Integrated commercial and residential projects in high-demand corridors. Dual income streams in a single structure.</p>
+      <span class="opp-tag">Diversified Returns</span>
+    </div>
+    <div class="opp-card">
+      <div class="opp-icon">○</div>
+      <div class="opp-title">Funds & Syndications</div>
+      <p class="opp-desc">Pooled vehicles for investors seeking managed exposure to a curated basket of assets without direct deal-by-deal involvement.</p>
+      <span class="opp-tag">Passive Income</span>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section style="background: var(--navy-mid); border-top: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border);">
+  <div class="section-eyebrow">The Process</div>
+  <h2 class="section-title">From profile to portfolio<br>in four steps</h2>
+
+  <div class="how-grid">
+    <div class="how-step">
+      <div class="how-num">01</div>
+      <div class="how-title">Complete your investor profile</div>
+      <p class="how-desc">A short quiz helps us understand your goals, risk tolerance, and investment horizon.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-num">02</div>
+      <div class="how-title">Review curated opportunities</div>
+      <p class="how-desc">We match you to deals aligned with your profile. No noise — only relevant offerings.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-num">03</div>
+      <div class="how-title">Schedule your investor call</div>
+      <p class="how-desc">A one-on-one with our team to answer questions, review deal terms, and confirm fit.</p>
+    </div>
+    <div class="how-step">
+      <div class="how-num">04</div>
+      <div class="how-title">Verify and deploy</div>
+      <p class="how-desc">Complete KYC/AML, sign documents electronically, and put your capital to work.</p>
+    </div>
+  </div>
+
+  <div class="quote-block" style="margin-top: 64px;">
+    <p class="quote-text">"We don't chase trends. We build structures that generate returns across market cycles — because legacy isn't measured in quarters."</p>
+    <div class="quote-attr">— Legacy Collective Ventures</div>
+  </div>
+</section>
+
+<!-- QUIZ CTA -->
+<section class="quiz-section">
+  <div class="section-eyebrow">Get Started</div>
+  <h2 class="section-title" style="text-align: center;">Are you the right fit?</h2>
+  <p class="section-sub" style="text-align: center;">
+    Complete a 3-minute investor profile quiz. We use your answers to match you with the right opportunities and prepare for your onboarding call.
+  </p>
+
+  <div class="quiz-steps">
+    <div class="quiz-step">
+      <div class="step-num">3</div>
+      <div class="step-text">Minutes<br>to complete</div>
+    </div>
+    <div class="quiz-step">
+      <div class="step-num">12</div>
+      <div class="step-text">Questions<br>about your goals</div>
+    </div>
+    <div class="quiz-step">
+      <div class="step-num">1</div>
+      <div class="step-text">Call to close<br>your first deal</div>
+    </div>
+  </div>
+
+  <a href="Quiz.html" class="btn-primary" style="font-size: 13px; padding: 18px 48px;">Begin Investor Profile →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Legacy<span>.</span>Collective Ventures</div>
+  <p class="footer-note">
+    This is not an offer to sell or solicitation to buy securities. All investments carry risk. For accredited investors only. Please consult your financial advisor before making any investment decisions. All information submitted is confidential and used solely for onboarding and compliance purposes.
+  </p>
+</footer>
+
+</body>
+</html>
