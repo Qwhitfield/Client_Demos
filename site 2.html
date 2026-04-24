@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expedite Shuttle Services — SeaTac · Cruises · Tours · Seattle</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:  #0a0a0a;
+    --dark:   #111111;
+    --card:   #161616;
+    --card2:  #1b1b1b;
+    --border: rgba(255,255,255,0.07);
+    --white:  #f4f2ee;
+    --off:    #888480;
+    --accent: #e05c1a;
+    --gold:   #c9a84c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; inset: 0 0 auto 0; height: 62px; z-index: 100;
+    background: rgba(10,10,10,0.97); border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between; padding: 0 52px;
+    backdrop-filter: blur(8px);
+  }
+  .logo { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 3.5px; }
+  .logo span { color: var(--accent); }
+  .nav-links { list-style: none; display: flex; gap: 30px; }
+  .nav-links a { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--off); text-decoration: none; transition: color .2s; }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; background: var(--accent); color: var(--white); padding: 9px 22px; text-decoration: none; transition: filter .2s; }
+  .nav-cta:hover { filter: brightness(1.12); }
+
+  /* ─── HERO ─── */
+  .hero { padding-top: 62px; display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
+
+  .hero-copy { padding: 80px 52px; display: flex; flex-direction: column; justify-content: center; }
+
+  .vet-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.25);
+    padding: 6px 14px; border-radius: 2px;
+    font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 24px; width: fit-content;
+  }
+
+  .eyebrow { display: flex; align-items: center; gap: 12px; font-size: 10px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+  .eyebrow::before { content:''; width: 32px; height: 1px; background: var(--accent); }
+
+  h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(54px, 6vw, 82px); line-height: 0.97; letter-spacing: 1px; margin-bottom: 22px; }
+  h1 em { color: var(--accent); font-style: normal; }
+
+  .hero-desc { font-size: 15px; color: var(--off); line-height: 1.8; max-width: 420px; margin-bottom: 40px; font-weight: 300; }
+
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 44px; }
+  .btn-primary { display: inline-block; padding: 14px 30px; background: var(--accent); color: var(--white); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; text-decoration: none; transition: filter .2s, transform .2s; }
+  .btn-primary:hover { filter: brightness(1.12); transform: translateY(-1px); }
+  .btn-outline { display: inline-block; padding: 14px 30px; border: 1px solid rgba(255,255,255,0.18); color: var(--white); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; transition: border-color .2s, background .2s; }
+  .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.04); }
+
+  .chips { display: flex; gap: 10px; flex-wrap: wrap; }
+  .chip { font-size: 11px; letter-spacing: 1px; color: var(--off); border: 1px solid var(--border); padding: 6px 14px; border-radius: 100px; }
+
+  /* HERO VISUAL */
+  .hero-visual {
+    position: relative; overflow: hidden; background: var(--black);
+    display: flex; align-items: center; justify-content: center;
+  }
+  /* subtle radial glow behind the van */
+  .hero-visual::before {
+    content: ''; position: absolute; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse 80% 60% at 60% 55%, rgba(201,168,76,0.07) 0%, transparent 70%);
+  }
+  /* left-side fade so van bleeds into copy panel */
+  .hero-visual::after {
+    content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background: linear-gradient(90deg, var(--black) 0%, transparent 18%),
+                linear-gradient(to bottom, var(--black) 0%, transparent 12%, transparent 88%, var(--black) 100%);
+  }
+  /*
+    Van image — cut-out / transparent background PNG works best here.
+    It floats over the dark background rather than trying to fill the panel.
+  */
+  .van-img {
+    position: relative; z-index: 1;
+    width: 100%; max-width: 800px;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    /* subtle drop shadow to ground it */
+    filter: drop-shadow(0 20px 48px rgba(0,0,0,0.7)) drop-shadow(0 0 80px rgba(201,168,76,0.08));
+  }
+  .van-placeholder { width: 100%; height: 100%; min-height: 500px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; background: var(--black); }
+  .van-placeholder-icon { font-size: 72px; opacity: .18; }
+  .van-placeholder-text { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--off); opacity: .4; }
+
+  .stat-float { position: absolute; z-index: 3; background: rgba(10,10,10,0.9); border: 1px solid var(--border); backdrop-filter: blur(8px); padding: 14px 20px; }
+  .stat-float.s1 { bottom: 48px; right: 32px; }
+  .stat-float.s2 { top: 40px; right: 32px; }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 34px; line-height: 1; color: var(--accent); }
+  .stat-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--off); margin-top: 3px; }
+
+  /* ─── SECTION SHARED ─── */
+  .section { padding: 80px 52px; }
+  .section-dark { background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .section-head { margin-bottom: 48px; }
+  .section-eyebrow { font-size: 10px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; display: flex; align-items: center; gap: 12px; }
+  .section-eyebrow::before { content:''; width: 28px; height: 1px; background: var(--accent); }
+  h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(34px, 4vw, 52px); line-height: 1; letter-spacing: .5px; }
+
+  /* ─── DESTINATIONS ─── */
+  .dest-grid { display: grid; grid-template-columns: repeat(5, 1fr); border: 1px solid var(--border); }
+  .dest-card { padding: 28px 22px; border-right: 1px solid var(--border); transition: background .2s; position: relative; overflow: hidden; }
+  .dest-card:last-child { border-right: none; }
+  .dest-card::after { content:''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--accent); transition: width .35s ease; }
+  .dest-card:hover::after { width: 100%; }
+  .dest-card:hover { background: var(--card); }
+  .dest-icon { font-size: 22px; margin-bottom: 16px; }
+  .dest-name { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 1px; margin-bottom: 8px; }
+  .dest-desc { font-size: 11px; color: var(--off); line-height: 1.7; font-weight: 300; }
+
+  /* ─── PRICING ─── */
+  .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); margin-top: 48px; }
+  .price-card { background: var(--card); padding: 40px 36px; transition: background .2s; }
+  .price-card:hover { background: var(--card2); }
+  .price-card.featured { background: var(--card2); border-top: 2px solid var(--accent); }
+
+  /* second row of pricing */
+  .price-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: var(--border); margin-top: 2px; }
+
+  .price-tag { display: inline-block; font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(224,92,26,0.35); padding: 3px 10px; margin-bottom: 20px; }
+  .price-name { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 1px; margin-bottom: 8px; }
+  .price-amount { font-family: 'Bebas Neue', sans-serif; font-size: 64px; line-height: 1; color: var(--gold); margin-bottom: 4px; }
+  .price-amount sup { font-size: 26px; vertical-align: super; }
+  .price-note { font-size: 11px; color: var(--off); letter-spacing: 1px; margin-bottom: 24px; font-weight: 300; }
+  .price-divider { width: 32px; height: 1px; background: var(--border); margin-bottom: 20px; }
+  .price-detail { font-size: 13px; color: var(--off); line-height: 1.8; font-weight: 300; }
+
+  .price-cta { display: inline-block; margin-top: 28px; padding: 11px 24px; background: var(--accent); color: var(--white); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; text-decoration: none; transition: filter .2s; }
+  .price-cta:hover { filter: brightness(1.12); }
+
+  /* ─── HOW IT WORKS ─── */
+  .how-grid { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border); margin-top: 48px; }
+  .how-step { padding: 36px 28px; border-right: 1px solid var(--border); }
+  .how-step:last-child { border-right: none; }
+  .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 52px; line-height: 1; color: rgba(255,255,255,0.05); margin-bottom: 12px; }
+  .step-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 1px; margin-bottom: 10px; }
+  .step-desc { font-size: 12px; color: var(--off); line-height: 1.7; font-weight: 300; }
+
+  /* ─── ABOUT / VET STRIP ─── */
+  .about-strip {
+    background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    padding: 56px 52px; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
+  }
+  .about-strip h3 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(32px, 4vw, 48px); line-height: 1; margin-bottom: 16px; }
+  .about-strip p { font-size: 14px; color: var(--off); font-weight: 300; line-height: 1.85; }
+  .about-strip p + p { margin-top: 14px; }
+
+  .about-badges { display: flex; flex-direction: column; gap: 16px; }
+  .about-badge {
+    display: flex; align-items: center; gap: 16px;
+    background: var(--black); border: 1px solid var(--border); padding: 18px 22px;
+  }
+  .about-badge-icon { font-size: 22px; flex-shrink: 0; }
+  .about-badge-title { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 1px; margin-bottom: 2px; }
+  .about-badge-desc { font-size: 11px; color: var(--off); font-weight: 300; }
+
+  /* ─── CONTACT STRIP ─── */
+  .contact-strip { padding: 56px 52px; display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: center; border-top: 1px solid var(--border); }
+  .contact-strip h3 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(28px, 3.5vw, 44px); line-height: 1; margin-bottom: 10px; }
+  .contact-strip p { font-size: 14px; color: var(--off); font-weight: 300; line-height: 1.7; max-width: 480px; }
+  .contact-actions { display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; min-width: 210px; }
+  .contact-phone { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 24px; background: var(--white); color: var(--black); font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 2px; text-decoration: none; transition: filter .2s; }
+  .contact-phone:hover { filter: brightness(0.92); }
+  .contact-book { display: flex; align-items: center; justify-content: center; padding: 13px 24px; border: 1px solid var(--border); color: var(--off); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; transition: border-color .2s, color .2s; }
+  .contact-book:hover { border-color: var(--white); color: var(--white); }
+
+  /* ─── FOOTER ─── */
+  footer { background: var(--dark); border-top: 1px solid var(--border); padding: 36px 52px; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 3px; }
+  .footer-logo span { color: var(--accent); }
+  .footer-sub { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--off); margin-top: 4px; }
+  .footer-right { text-align: right; font-size: 12px; color: var(--off); line-height: 1.9; font-weight: 300; }
+
+  /* ─── SAMPLE BADGE ─── */
+  .sample-badge { position: fixed; bottom: 20px; right: 20px; background: var(--accent); color: var(--white); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; padding: 8px 16px; z-index: 200; box-shadow: 0 4px 20px rgba(224,92,26,0.35); }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-visual { height: 280px; }
+    .van-placeholder { min-height: 280px; }
+    .hero-copy { padding: 80px 24px 56px; }
+    .section { padding: 60px 24px; }
+    .dest-grid { grid-template-columns: 1fr 1fr; }
+    .dest-card { border-bottom: 1px solid var(--border); }
+    .price-grid, .price-grid-2 { grid-template-columns: 1fr; }
+    .how-grid { grid-template-columns: 1fr 1fr; }
+    .how-step { border-bottom: 1px solid var(--border); }
+    .about-strip { grid-template-columns: 1fr; padding: 48px 24px; gap: 40px; }
+    .contact-strip { grid-template-columns: 1fr; padding: 48px 24px; gap: 32px; }
+    footer { padding: 28px 24px; }
+    .footer-right { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sample-badge">★ Sample Preview</div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Expedite <span>Shuttle</span></div>
+  <ul class="nav-links">
+    <li><a href="#destinations">Destinations</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#pricing" class="nav-cta">Book a Ride</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-copy">
+    <div class="vet-badge">🎖️ Veteran-Owned &amp; Operated</div>
+    <div class="eyebrow">Tukwila · SeaTac · Seattle</div>
+    <h1>Your ride.<br><em>Handled.</em></h1>
+    <p class="hero-desc">Professional shuttle service to SeaTac Airport, Seattle cruise terminals, Tukwila Train Station, and beyond. Chicago-born, veteran-owned, and committed to showing up right every time.</p>
+    <div class="hero-actions">
+      <a href="#pricing" class="btn-primary">Book a Ride</a>
+      <a href="tel:+15102243292" class="btn-outline">📞 510-224-3292</a>
+    </div>
+    <div class="chips">
+      <span class="chip">✈️ Airport</span>
+      <span class="chip">🛳️ Cruise Piers</span>
+      <span class="chip">🚉 Train Station</span>
+      <span class="chip">🔒 Private</span>
+      <span class="chip">🌆 Tours</span>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <!--
+      SWAP: Replace this placeholder div with the van photo:
+      <img class="van-img" src="van.jpg" alt="Expedite Shuttle Services van">
+      Use any of the Facebook cover or post photos — the branded van shot works perfectly here.
+    -->
+      <img class="van-img" src="2T.png" alt="Expedite Shuttle Services van">
+  
+    <div class="stat-float s2">
+      <div class="stat-num">24/7</div>
+      <div class="stat-label">Available</div>
+    </div>
+    <div class="stat-float s1">
+      <div class="stat-num">VET</div>
+      <div class="stat-label">Owned &amp; Operated</div>
+    </div>
+  </div>
+</section>
+
+<!-- DESTINATIONS -->
+<section class="section" id="destinations">
+  <div class="section-head">
+    <div class="section-eyebrow">Where We Go</div>
+    <h2>We know the routes.</h2>
+  </div>
+  <div class="dest-grid">
+    <div class="dest-card">
+      <div class="dest-icon">✈️</div>
+      <div class="dest-name">SeaTac Airport</div>
+      <p class="dest-desc">Reliable airport transfers. We plan around your flight so you're never cutting it close.</p>
+    </div>
+    <div class="dest-card">
+      <div class="dest-icon">🛳️</div>
+      <div class="dest-name">Pier 66 & 91</div>
+      <p class="dest-desc">Seattle cruise terminal drop-offs and pickups. We know the lots and the departure windows.</p>
+    </div>
+    <div class="dest-card">
+      <div class="dest-icon">🚉</div>
+      <div class="dest-name">Tukwila Station</div>
+      <p class="dest-desc">Tukwila International Blvd train connections. Clean handoff every time.</p>
+    </div>
+    <div class="dest-card">
+      <div class="dest-icon">🔒</div>
+      <div class="dest-name">Private Rides</div>
+      <p class="dest-desc">Custom pickups for individuals and small groups. Flexible, discreet, on your schedule.</p>
+    </div>
+    <div class="dest-card">
+      <div class="dest-icon">🌆</div>
+      <div class="dest-name">Tours & Events</div>
+      <p class="dest-desc">City tours, special occasions, and group outings. Book by the hour, we handle the rest.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section section-dark" id="pricing">
+  <div class="section-head">
+    <div class="section-eyebrow">Pricing</div>
+    <h2>Simple. No surprises.</h2>
+  </div>
+
+  <!-- Row 1: three cards -->
+  <div class="price-grid">
+    <div class="price-card">
+      <div class="price-tag">Early Bird</div>
+      <div class="price-name">Airport — Early Run</div>
+      <div class="price-amount"><sup>$</sup>30</div>
+      <div class="price-note">Per ride · Early morning departures</div>
+      <div class="price-divider"></div>
+      <p class="price-detail">Best for early flights out of SeaTac. We leave on schedule so you don't have to stress the clock.</p>
+      <a href="https://calendly.com/expediteshuttleservices/early-bird" target="_blank" class="price-cta">Book This Ride</a>
+    </div>
+
+    <div class="price-card featured">
+      <div class="price-tag">Most Booked</div>
+      <div class="price-name">Cruise Terminal</div>
+      <div class="price-amount"><sup>$</sup>35</div>
+      <div class="price-note">Per ride · Pier 66 or Pier 91</div>
+      <div class="price-divider"></div>
+      <p class="price-detail">Seattle cruise terminal drop-offs and pickups. We know departure windows and plan around them.</p>
+      <a href="https://calendly.com/expediteshuttleservices/piers" target="_blank" class="price-cta">Book This Ride</a>
+    </div>
+
+    <div class="price-card">
+      <div class="price-tag">Tours</div>
+      <div class="price-name">2-Hour Tour</div>
+      <div class="price-amount"><sup>$</sup>100</div>
+      <div class="price-note">Flat rate · 2 hours</div>
+      <div class="price-divider"></div>
+      <p class="price-detail">City tours, event transportation, or custom routes. Flat pricing, flexible scheduling.</p>
+      <a href="https://calendly.com/expediteshuttleservices/tour" target="_blank" class="price-cta">Book This Ride</a>
+    </div>
+  </div>
+
+  <!-- Row 2: two cards -->
+  <div class="price-grid-2">
+    <div class="price-card">
+      <div class="price-tag">Airport</div>
+      <div class="price-name">Airport Transfer</div>
+      <div class="price-amount" style="font-size:48px;">Ask Us</div>
+      <div class="price-note">Standard airport runs · All hours</div>
+      <div class="price-divider"></div>
+      <p class="price-detail">SeaTac drop-offs and pickups at any hour. Reliable, professional, no waiting around.</p>
+      <a href="https://calendly.com/expediteshuttleservices/airport" target="_blank" class="price-cta">Book This Ride</a>
+    </div>
+
+    <div class="price-card">
+      <div class="price-tag">Private</div>
+      <div class="price-name">Private Ride</div>
+      <div class="price-amount" style="font-size:48px;">Ask Us</div>
+      <div class="price-note">Custom pickup · Your schedule</div>
+      <div class="price-divider"></div>
+      <p class="price-detail">Need a ride that doesn't fit a standard category? Reach out and we'll get you sorted.</p>
+      <a href="https://calendly.com/expediteshuttleservices/private" target="_blank" class="price-cta">Book This Ride</a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section">
+  <div class="section-head">
+    <div class="section-eyebrow">How It Works</div>
+    <h2>Easy from the start.</h2>
+  </div>
+  <div class="how-grid">
+    <div class="how-step">
+      <div class="step-num">01</div>
+      <div class="step-title">Pick Your Ride</div>
+      <p class="step-desc">Find your service type above — airport, piers, train, private, or tour. Each has its own booking link.</p>
+    </div>
+    <div class="how-step">
+      <div class="step-num">02</div>
+      <div class="step-title">Book Online</div>
+      <p class="step-desc">Select your date and time through the calendar. Instant confirmation, no back-and-forth required.</p>
+    </div>
+    <div class="how-step">
+      <div class="step-num">03</div>
+      <div class="step-title">Get Confirmed</div>
+      <p class="step-desc">You'll get a confirmation with your pickup details. We track schedules and show up ready.</p>
+    </div>
+    <div class="how-step">
+      <div class="step-num">04</div>
+      <div class="step-title">We Handle the Rest</div>
+      <p class="step-desc">Clean van, professional service, on-time arrival. Just get in and go.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / VET -->
+<div class="about-strip" id="about">
+  <div>
+    <h3>Chicago-born.<br>Veteran-built.</h3>
+    <p>Expedite Shuttle Services was built on the same principles that define military service — show up on time, do the job right, and never leave someone hanging.</p>
+    <p>We serve Tukwila, SeaTac, and Seattle with the kind of reliability that's hard to find. Whether you're catching a 5am flight or heading out for a cruise, we treat every ride like it matters — because to you, it does.</p>
+  </div>
+  <div class="about-badges">
+    <div class="about-badge">
+      <div class="about-badge-icon">🎖️</div>
+      <div>
+        <div class="about-badge-title">Veteran Owned & Operated</div>
+        <p class="about-badge-desc">Proud to serve the community that served us</p>
+      </div>
+    </div>
+    <div class="about-badge">
+      <div class="about-badge-icon">📍</div>
+      <div>
+        <div class="about-badge-title">Local to the Area</div>
+        <p class="about-badge-desc">Tukwila, SeaTac, Seattle & surrounding areas</p>
+      </div>
+    </div>
+    <div class="about-badge">
+      <div class="about-badge-icon">🚐</div>
+      <div>
+        <div class="about-badge-title">Clean, Maintained Van</div>
+        <p class="about-badge-desc">Professionally maintained and always ready</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-strip" id="contact">
+  <div>
+    <h3>Questions? Just call.</h3>
+    <p>Text or call directly to check availability, ask about group rates, or get a quote for something not listed above. We respond fast.</p>
+  </div>
+  <div class="contact-actions">
+    <a href="tel:+15102243292" class="contact-phone">📞 510-224-3292</a>
+    <a href="#pricing" class="contact-book">View All Services & Book</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">Expedite <span>Shuttle</span></div>
+    <div class="footer-sub">Veteran-Owned · Tukwila · SeaTac · Seattle, WA</div>
+  </div>
+  <div class="footer-right">
+    510-224-3292<br>
+    Available 7 days a week
+  </div>
+</footer>
+
+</body>
+</html>
