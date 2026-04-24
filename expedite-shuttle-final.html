@@ -68,23 +68,39 @@
   .chip { font-size: 11px; letter-spacing: 1px; color: var(--off); border: 1px solid var(--border); padding: 6px 14px; border-radius: 100px; }
 
   /* HERO VISUAL */
-  .hero-visual { position: relative; overflow: hidden; background: #0d0d0d; }
-  .hero-visual::before {
-    content: ''; position: absolute; inset: 0; z-index: 1;
-    background: linear-gradient(90deg, var(--black) 0%, transparent 15%),
-                linear-gradient(to bottom, rgba(10,10,10,.3) 0%, transparent 20%, transparent 70%, rgba(10,10,10,.7) 100%);
+  .hero-visual {
+    position: relative; overflow: hidden; background: var(--black);
+    display: flex; align-items: center; justify-content: center;
   }
-  /* 
-    TO ADD VAN PHOTO:
-    Replace the .van-placeholder div below with:
-    <img class="van-img" src="van.jpg" alt="Expedite Shuttle Services van">
+  /* subtle radial glow behind the van */
+  .hero-visual::before {
+    content: ''; position: absolute; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse 80% 60% at 60% 55%, rgba(201,168,76,0.07) 0%, transparent 70%);
+  }
+  /* left-side fade so van bleeds into copy panel */
+  .hero-visual::after {
+    content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background: linear-gradient(90deg, var(--black) 0%, transparent 18%),
+                linear-gradient(to bottom, var(--black) 0%, transparent 12%, transparent 88%, var(--black) 100%);
+  }
+  /*
+    Van image — cut-out / transparent background PNG works best here.
+    It floats over the dark background rather than trying to fill the panel.
   */
-  .van-img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
-  .van-placeholder { width: 100%; height: 100%; min-height: 500px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; background: linear-gradient(135deg, #0f0f0f 0%, #1a160d 100%); }
+  .van-img {
+    position: relative; z-index: 1;
+    width: 100%; max-width: 800px;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    /* subtle drop shadow to ground it */
+    filter: drop-shadow(0 20px 48px rgba(0,0,0,0.7)) drop-shadow(0 0 80px rgba(201,168,76,0.08));
+  }
+  .van-placeholder { width: 100%; height: 100%; min-height: 500px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; background: var(--black); }
   .van-placeholder-icon { font-size: 72px; opacity: .18; }
   .van-placeholder-text { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--off); opacity: .4; }
 
-  .stat-float { position: absolute; z-index: 2; background: rgba(10,10,10,0.9); border: 1px solid var(--border); backdrop-filter: blur(8px); padding: 14px 20px; }
+  .stat-float { position: absolute; z-index: 3; background: rgba(10,10,10,0.9); border: 1px solid var(--border); backdrop-filter: blur(8px); padding: 14px 20px; }
   .stat-float.s1 { bottom: 48px; right: 32px; }
   .stat-float.s2 { top: 40px; right: 32px; }
   .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 34px; line-height: 1; color: var(--accent); }
@@ -238,10 +254,8 @@
       <img class="van-img" src="van.jpg" alt="Expedite Shuttle Services van">
       Use any of the Facebook cover or post photos — the branded van shot works perfectly here.
     -->
-    <div class="van-placeholder">
-      <div class="van-placeholder-icon">🚐</div>
-      <div class="van-placeholder-text">Van photo goes here</div>
-    </div>
+      <img class="van-img" src="2T.png" alt="Expedite Shuttle Services van">
+  
     <div class="stat-float s2">
       <div class="stat-num">24/7</div>
       <div class="stat-label">Available</div>
